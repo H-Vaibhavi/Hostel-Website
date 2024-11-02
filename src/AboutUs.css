@@ -1,0 +1,87 @@
+
+body{
+  color: white;
+}
+.about-us-section {
+    padding: 0px;
+    background-image: url(assets/images/hostel2.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    max-width: 100%; /* Center the content */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+  
+  .about-us-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: black; /* Darker text color */
+  }
+  
+  .about-us-section p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-weight: bolder;
+    color: black;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form {
+    border: 2px solid #3498db; /* Blue border */
+    border-radius: 5px;
+    width: 400px;
+    align-items: center;
+    margin-left: 550px;
+    padding: 20px;
+    background-color: #ffffff; /* White background for form */
+    opacity: 0; /* Start hidden */
+    transform: translateX(-50%); /* Start from the left */
+    transition: all 0.5s ease; /* Smooth transition */
+  }
+  
+  .slide-in {
+    opacity: 1; /* Fade in */
+    transform: translateX(0); /* Slide in to its original position */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50; /* Darker text color */
+  }
+  
+  /* Adjust width and background color for input and textarea */
+  .form-group input,
+  .form-group textarea {
+    width: 90%; /* Decrease width to 80% of the form */
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: black;
+    border-radius: 4px;
+    background-color: #eaf0f6; /* Light blue background */
+  }
+  
+  .form-group textarea {
+    height: 100px; /* Height for textarea */
+  }
+  
+  .submit-button {
+    background-color: #3498db; /* Blue button */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+  }
+  

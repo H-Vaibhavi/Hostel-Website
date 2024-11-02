@@ -1,0 +1,66 @@
+
+.success-stories-section {
+    margin: 0px;
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 8px;
+    max-width: 100%; /* Center the content */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .success-stories-section h2.highlight {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #3498db; /* Highlight color */
+    text-align: center; /* Center the title */
+  }
+  
+  .hostel-success {
+    text-align: center; /* Center the success message */
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 20px; /* Space below the success message */
+    color: #2c3e50; /* Darker text color */
+  }
+  
+  .student-boxes {
+    display: flex;
+    justify-content: space-between; /* Space out boxes */
+    flex-wrap: wrap; /* Allow wrapping to next line */
+  }
+  
+  .student-box {
+    width: 30%; /* Set width to 30% for 3 boxes in a row */
+    background-color: #ffffff; /* White background for student boxes */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px; /* Margin between boxes */
+    overflow: hidden; /* Prevent content overflow */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .student-box:hover {
+    transform: scale(1.05); /* Scale up the box on hover */
+    background-color: #3498db; /* Light cyan background on hover */
+  }
+  
+  .student-box img {
+    width: 100%; /* Make images fill the box */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .student-info {
+    padding: 15px;
+  }
+  
+  .student-info h3 {
+    margin: 0 0 10px; /* Space between name and description */
+    font-size: 18px; 
+    color: black;/* Slightly larger name font */
+  }
+  
+  .student-info p {
+    font-size: 14px; /* Description font size */
+    color: #333; /* Darker color for text */
+  }
+  

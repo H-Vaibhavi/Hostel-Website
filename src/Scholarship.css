@@ -1,0 +1,98 @@
+body {
+ /* Dark Green for the body */
+  color: white; /* Text color */
+  margin: 10px; /* Remove default margin */
+  font-family: Arial, sans-serif; /* Default font */
+}
+
+.scholar-container {
+  max-width: 800px; /* Maximum width */
+  padding: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd; /* Outer border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: #333; /* Text color for the form */
+}
+
+.scholar-container h2 {
+  text-align: center;
+  color: #0f4871; /* Dark Green */
+}
+
+.scholar-container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Full width of the container */
+}
+
+.scholar-container div {
+  margin-bottom: 20px; /* Space between each field group */
+}
+
+.scholar-container label {
+  margin-bottom: 5px;
+  margin-right: 20px; /* Space between label and input */
+  font-weight: bold;
+}
+
+.scholar-container input[type="text"],
+.scholar-container input[type="number"],
+.scholar-container input[type="file"] {
+  background-color: white; /* Set background to white */
+  border: none; /* Remove the border */
+  border-bottom: 2px solid #4CAF50; /* Add a bottom border */
+  padding: 10px 0; /* Vertical padding only */
+  color: black;
+  outline: none; /* Remove outline */
+  font-size: 16px; /* Increase font size */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+  width: 100%; /* Full width of input field */
+}
+
+.scholar-container input[type="text"]:focus,
+.scholar-container input[type="number"]:focus {
+  border-color: #007BFF; /* Change border color on focus */
+}
+
+.scholar-container button {
+  padding: 10px;
+  max-width: 300px; /* Max width for button */
+  width: 100%; /* Full width of button */
+  background-color: #4CAF50; /* Button background color */
+  color: white; /* Button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin: 40px auto 0; /* Center the button and add space above */
+  display: block; /* Ensures the margin auto works */
+}
+
+.scholar-container button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.scholar-container a {
+  text-decoration: none;
+  color: #4CAF50; /* Link color */
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+}
+
+.scholar-container a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.scholar-container button.back-button {
+  margin-top: 10px;
+  background-color: #007BFF; /* Blue background for Back button */
+}
+
+.scholar-container button.back-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+

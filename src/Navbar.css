@@ -1,0 +1,27 @@
+.navbar {
+    background-color: transparent; /* Navbar background color */
+    height: 80px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .navbar a {
+    color: rgb(7, 0, 0); /* Text color for links */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px;
+    justify-content: space-between;
+    margin-right: 20px; /* Space between links */
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
+  .register-button {
+    background-color: #2980b9; /* Different color for register button */
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  

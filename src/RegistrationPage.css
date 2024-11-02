@@ -1,0 +1,132 @@
+/* Main container for registration page */
+.registration-page-container {
+  display: flex;
+  height: 100vh; /* Full screen height */
+  width: 100vw; /* Full screen width */
+  overflow: hidden; /* Prevents scrollbar due to animation */
+}
+
+/* Form container styling */
+.form-container {
+  width: 50%; /* Takes half of the screen width */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #ddd; /* Added border to form */
+  z-index: 1;
+}
+
+h2 {
+  color: #0f4871;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.input-field {
+  width: 100px; /* Decreased width of input fields */
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc; /* Optional border for input fields */
+  border-radius: 4px;
+}
+
+.register-button {
+  width: 150px; /* Decreased width of the button */
+  padding: 8px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+
+.register-button:hover {
+  background-color: #45a049;
+}
+
+.login-redirect {
+  text-align: center;
+  margin-top: 20px;
+  color: black;
+}
+
+.login-redirect a {
+  color: #0f4871;
+  text-decoration: none;
+}
+
+.login-redirect a:hover {
+  text-decoration: underline;
+}
+
+/* Image container styling */
+.image-container {
+  width: 50%; /* Takes half of the screen width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  z-index: 1;
+}
+
+.image-container img {
+  max-width: 100%; /* Ensures the image scales properly */
+  height: auto;
+}
+
+/* Animation for sliding in */
+.animated-slide-left {
+  animation: slideInFromLeft 1s ease-out forwards;
+}
+
+.animated-slide-right {
+  animation: slideInFromRight 1s ease-out forwards;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.message.success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+

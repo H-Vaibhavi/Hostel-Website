@@ -1,0 +1,22 @@
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Folder to save uploaded files
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}_${file.originalname}`); // Add a timestamp to the filename
+    }
+});
+
+app.post('/scholarship', upload.single('photo'), async (req, res) => {
+    const { name, college, marks, year } = req.body;
+    const photo = req.file.path; // Get the path of the uploaded file
+
+    try {
+        const newScholarship = new Scholarship({ name, college, marks, year, photo });
+        await newScholarship.save();
+        res.status(201).send("Scholarship application submitted successfully.");
+    } catch (error) {
+        console.error("Error saving scholarship application:", error);
+        res.status(500).send("Error saving application.");
+    }
+});
