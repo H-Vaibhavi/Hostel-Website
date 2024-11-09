@@ -6,8 +6,9 @@ import LoginPage from './LoginPage';
 import AboutUs from './AboutUs';
 import SuccessStories from './SuccessStories';
 import MessReviewPage from './MessReview';
-import Scholarship from './Scholarship';
 import RegistrationPage from './RegistrationPage';
+import Scholarship from './Scholarship';
+import ScholarshipPage from './ScholarshipPage';
 import { AuthProvider, useAuth } from './AuthContext'; 
 import AdminPanel from './AdminPanel';// Import AuthContext
 
@@ -34,9 +35,11 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/stories" element={<SuccessStories />} />
             <Route path="/mess" element={<MessReviewPage />} />
-            <Route path="/scholarship" element={<PrivateRoute element={<Scholarship />} />} /> {/* Protected route */}
+            <Route path="/ScholarshipPage" element={<ScholarshipPage />} /> {/* Protected route */}
             <Route path="/register" element={<RegistrationPage />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/" element={<ScholarshipPage />} />
+            <Route path="/Scholarship" element={<Scholarship />} /> 
           </Routes>
         </div>
       </Router>

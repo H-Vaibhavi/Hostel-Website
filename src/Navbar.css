@@ -1,14 +1,15 @@
 .navbar {
-    background-color: transparent; /* Navbar background color */
+    background-color: rgb(0, 0, 0,0.6); /* Navbar background color */
     height: 80px;
-    border-radius: 8px;
     display: flex;
+    width: 100%;
+    margin: 0%;
     justify-content: space-evenly;
     align-items: center;
   }
   
   .navbar a {
-    color: rgb(7, 0, 0); /* Text color for links */
+    color: #ffffff;/* Text color for links */
     text-decoration: none; /* Remove underline */
     font-size: 16px;
     justify-content: space-between;

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const multer = require('multer'); // For handling file uploads
 const path = require('path');
+const Razorpay = require('razorpay');  // Import Razorpay
 const hostelModel = require('./models/hostel');
 const Scholarship = require('./models/scholarshipModel'); // Import the scholarship model
 
@@ -20,15 +21,16 @@ const allowedOrigins = ['http://localhost:5173', 'http://localhost:5175'];
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
+        if (!origin) return callback(null, true); // Allow requests with no origin (e.g., mobile apps)
         if (allowedOrigins.indexOf(origin) === -1) {
             const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
             return callback(new Error(msg), false);
         }
         return callback(null, true);
     },
-    methods: ["POST"],
-    credentials: true
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // Allow cookies and credentials if needed
 }));
 
 // Set up multer for image upload
@@ -45,9 +47,19 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/hostel")
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log("MongoDB connection error: ", err));
+
+mongoose.connect('mongodb://localhost:27017/yourdbname', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => {
+        console.error('MongoDB connection error:', err);
+        process.exit(1);  // Exit the process if MongoDB connection fails
+    });
+
+// Razorpay Setup
+const razorpay = new Razorpay({
+    key_id: 'rzp_test_TtA2LqaIHN7X2I',  // Your Razorpay Key ID
+    key_secret: '4h4VETyxgb9JXixtC11VEkJq',  // Your Razorpay Secret Key
+});
 
 // Login route
 app.post('/login', async (req, res) => {
@@ -61,7 +73,7 @@ app.post('/login', async (req, res) => {
     return res.status(401).json({ message: "Invalid login credentials" });
 });
 
-
+// Register route
 app.post('/register', async (req, res) => {
     const { name, email, password, c_password } = req.body;
 
@@ -96,7 +108,6 @@ app.post('/register', async (req, res) => {
     }
 });
 
-
 // Scholarship submission route
 app.post('/scholarship', upload.single('photo'), async (req, res) => {
     const { name, college, marks, year } = req.body;
@@ -118,6 +129,7 @@ app.post('/scholarship', upload.single('photo'), async (req, res) => {
         res.status(500).send("Error saving application.");
     }
 });
+
 // Fetch all scholarship applications
 app.get('/scholarships', async (req, res) => {
     try {
@@ -126,6 +138,26 @@ app.get('/scholarships', async (req, res) => {
     } catch (error) {
         console.error("Error fetching scholarships:", error);
         res.status(500).send("Error fetching scholarships.");
+    }
+});
+
+// Razorpay Order Creation Route
+app.post('/create-order', async (req, res) => {
+    const { amount } = req.body;
+
+    // Create Razorpay order
+    const options = {
+        amount: amount * 100, // Convert to paise (smallest currency unit)
+        currency: 'INR',
+        receipt: `receipt_${new Date().getTime()}`,
+    };
+
+    try {
+        const order = await razorpay.orders.create(options);
+        res.json({ id: order.id, amount: order.amount });
+    } catch (error) {
+        console.error('Error creating Razorpay order:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
 

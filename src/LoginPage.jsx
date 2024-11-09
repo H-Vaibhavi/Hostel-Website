@@ -50,25 +50,20 @@ const LoginPage = () => {
         <div className="login-page">
             {/* Header Section */}
             <div className="header-container">
-                <div className="site-name">
-                    <h1>Dr. Babasaheb Ambedkar Backward Class Boys Hostel</h1>
-                </div>
                 <div className="navbar">
                     <Link to="/about">About Us</Link>
                     <Link to="/stories">Success Stories</Link>
                     <Link to="/mess">Mess Review</Link>
-                    <Link to="/scholarship">Apply for Scholarship</Link>
-                    <li><Link to="/admin">Admin Panel</Link></li> {/* Link to login page */} 
-                    <a href="https://navayan.com/hostel-help.php#Hostel-Documents" target="_blank" rel="noopener noreferrer">Required Documents</a>
+                    <Link to="/ScholarshipPage">Scholarship</Link>
+                    <Link to="/admin">Admin Panel</Link>
+                    {/* <a href="https://navayan.com/hostel-help.php#Hostel-Documents" target="_blank" rel="noopener noreferrer">Required Documents</a> */}
                     <Link to="/register" className="register-button">Register</Link>
-        
                 </div>
+                
             </div>
-
-            <br />
-
-           
-            
+            <div className="site-name">
+                    <h1>Dr. Babasaheb Ambedkar Backward Class Boys Hostel</h1>
+                </div>
 
             {/* Login Section */}
             <div className="login-section">

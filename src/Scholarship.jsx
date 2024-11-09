@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { useNavigate } from 'react-router-dom';
 import './scholarship.css';
 
 const Scholarship = () => {
   const [photoFile, setPhotoFile] = useState(null);
-  const navigate = useNavigate(); // Initialize the navigate function
+  const [casteFile, setCasteFile] = useState(null);
+  const [incomeFile, setIncomeFile] = useState(null);
+  const [marksheetFile, setMarksheetFile] = useState(null);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -28,117 +31,84 @@ const Scholarship = () => {
       formData.append('college', values.college);
       formData.append('marks', values.marks);
       formData.append('year', values.year);
-      formData.append('photo', photoFile); // 'photoFile' should be the uploaded image file
+      formData.append('photo', photoFile);
+      formData.append('caste', casteFile);
+      formData.append('income', incomeFile);
+      formData.append('marksheet', marksheetFile);
 
       axios.post('http://localhost:3001/scholarship', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then(response => {
-        console.log('Server response:', response);
         alert('Scholarship form submitted successfully!');
       })
       .catch(error => {
-        console.error('Error submitting scholarship form:', error);
         alert('There was an error submitting the form.');
       });
     },
   });
 
-  const handlePhotoUpload = (event) => {
-    setPhotoFile(event.target.files[0]);
-  };
+  const handlePhotoUpload = (event) => setPhotoFile(event.target.files[0]);
+  const handleCasteUpload = (event) => setCasteFile(event.target.files[0]);
+  const handleIncomeUpload = (event) => setIncomeFile(event.target.files[0]);
+  const handleMarksheetUpload = (event) => setMarksheetFile(event.target.files[0]);
 
-  // Handle navigation to home
-  const handleBack = () => {
-    navigate('/'); // Redirect to home page
-  };
+  const handleBack = () => navigate('/ScholarshipPage');
 
   return (
     <div className="scholar-container">
       <h2>Scholarship Application</h2>
       <form onSubmit={formik.handleSubmit}>
-        {/* Name Field */}
         <div>
           <label htmlFor="name">Name:</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.name}
-          />
-          {formik.touched.name && formik.errors.name ? (
-            <div>{formik.errors.name}</div>
-          ) : null}
+          <input id="name" name="name" type="text" {...formik.getFieldProps('name')} />
+          {formik.touched.name && formik.errors.name && <div>{formik.errors.name}</div>}
         </div>
 
-        {/* College Field */}
         <div>
           <label htmlFor="college">College:</label>
-          <input
-            id="college"
-            name="college"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.college}
-          />
-          {formik.touched.college && formik.errors.college ? (
-            <div>{formik.errors.college}</div>
-          ) : null}
+          <input id="college" name="college" type="text" {...formik.getFieldProps('college')} />
+          {formik.touched.college && formik.errors.college && <div>{formik.errors.college}</div>}
         </div>
 
-        {/* Marks Field */}
         <div>
           <label htmlFor="marks">Marks:</label>
-          <input
-            id="marks"
-            name="marks"
-            type="number"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.marks}
-          />
-          {formik.touched.marks && formik.errors.marks ? (
-            <div>{formik.errors.marks}</div>
-          ) : null}
+          <input id="marks" name="marks" type="number" {...formik.getFieldProps('marks')} />
+          {formik.touched.marks && formik.errors.marks && <div>{formik.errors.marks}</div>}
         </div>
 
-        {/* Year Field */}
         <div>
           <label htmlFor="year">Current Academic Year:</label>
-          <input
-            id="year"
-            name="year"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.year}
-          />
-          {formik.touched.year && formik.errors.year ? (
-            <div>{formik.errors.year}</div>
-          ) : null}
+          <input id="year" name="year" type="text" {...formik.getFieldProps('year')} />
+          {formik.touched.year && formik.errors.year && <div>{formik.errors.year}</div>}
         </div>
 
-        {/* Photo Upload */}
         <div>
           <label htmlFor="photo">Upload Photo:</label>
           <input type="file" onChange={handlePhotoUpload} />
         </div>
 
-        {/* Submit Button */}
-        <button type="submit">Submit</button>
+        <div>
+          <label htmlFor="caste">Upload Caste Certificate:</label>
+          <input type="file" onChange={handleCasteUpload} />
+        </div>
 
-        {/* Back Button */}
-        <button type="button" onClick={handleBack} className="back-button">
-          Back
-        </button>
+        <div>
+          <label htmlFor="income">Upload Income Certificate:</label>
+          <input type="file" onChange={handleIncomeUpload} />
+        </div>
+
+        <div>
+          <label htmlFor="marksheet">Upload Marksheet:</label>
+          <input type="file" onChange={handleMarksheetUpload} />
+        </div>
+
+        <div>
+          <button type="submit" className='submit-button'>Submit</button>
+          <button type="button" onClick={handleBack} className="back-button">Back</button>
+        </div>
       </form>
 
-      <br />
       <h4>Related Scholarship Links</h4>
       <a href="https://mahadbtmahait.gov.in/" target="_blank" rel="noopener noreferrer">
         Babasaheb Ambedkar Samajkalyan Scholarship Portal
