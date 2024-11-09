@@ -1,4 +1,3 @@
-// scholarshipModel.js
 const mongoose = require('mongoose');
 
 const scholarshipSchema = new mongoose.Schema({
@@ -6,8 +5,11 @@ const scholarshipSchema = new mongoose.Schema({
     college: { type: String, required: true },
     marks: { type: Number, required: true },
     year: { type: String, required: true },
-    photo: { type: String, required: true } // Store image as a URL
+    photo: { type: String, required: true },
+    casteCertificate: { type: String, required: true },
+    incomeCertificate: { type: String, required: true },
+    marksheet: { type: String, required: true }
 });
 
-const Scholarship = mongoose.model('Scholarship', scholarshipSchema);
+const Scholarship = mongoose.model('scholarships', scholarshipSchema);
 module.exports = Scholarship;

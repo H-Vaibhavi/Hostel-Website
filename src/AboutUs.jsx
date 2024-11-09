@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar'; // Import the Navbar component
 import './AboutUs.css';
+import Footer from './Footer';
 
 const AboutUs = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +26,7 @@ const AboutUs = () => {
   };
 
   return (
+    <div>
     <div className="about-us-section">
       <Navbar /> {/* Include the Navbar here */}
       <h2>About Us</h2>
@@ -71,6 +73,8 @@ const AboutUs = () => {
         </button>
       </form>
     </div>
+     <Footer />
+   </div>
   );
 };
 

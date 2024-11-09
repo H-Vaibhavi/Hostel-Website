@@ -1,7 +1,6 @@
-// AdminPanel.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './adminPanel.css'; // You can create a CSS file for styling
+import './adminPanel.css';
 
 const AdminPanel = () => {
   const [scholarships, setScholarships] = useState([]);
@@ -38,6 +37,9 @@ const AdminPanel = () => {
             <th>Marks</th>
             <th>Year</th>
             <th>Photo</th>
+            <th>Caste Certificate</th>
+            <th>Income Certificate</th>
+            <th>Marksheet</th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +50,38 @@ const AdminPanel = () => {
               <td>{scholarship.marks}</td>
               <td>{scholarship.year}</td>
               <td>
-                <img src={`http://localhost:3001/${scholarship.photo}`} alt={scholarship.name} width="100" />
+                <img
+                  src={`http://localhost:3001/${scholarship.photo}`}
+                  alt={scholarship.name}
+                  width="100"
+                />
+              </td>
+              <td>
+                <a
+                  href={`http://localhost:3001/${scholarship.casteCertificate}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download Caste Certificate
+                </a>
+              </td>
+              <td>
+                <a
+                  href={`http://localhost:3001/${scholarship.incomeCertificate}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download Income Certificate
+                </a>
+              </td>
+              <td>
+                <a
+                  href={`http://localhost:3001/${scholarship.marksheet}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download Marksheet
+                </a>
               </td>
             </tr>
           ))}

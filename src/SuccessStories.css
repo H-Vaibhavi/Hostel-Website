@@ -46,6 +46,7 @@
   .student-box img {
     width: 100%; /* Make images fill the box */
     height: auto; /* Maintain aspect ratio */
+    border-radius: 50%;
   }
   
   .student-info {

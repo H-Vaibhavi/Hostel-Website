@@ -2,64 +2,30 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
-const multer = require('multer'); // For handling file uploads
-const path = require('path');
-const Razorpay = require('razorpay');  // Import Razorpay
-const hostelModel = require('./models/hostel');
-const Scholarship = require('./models/scholarshipModel'); // Import the scholarship model
+const multer = require("multer");
+const path = require("path");
+const Scholarship = require('./models/scholarshipModel');
+const Razorpay = require('razorpay');  // Make sure Razorpay module is required
 
-// Initialize Express app
 const app = express();
 
-// Middleware
+// Middleware for body parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Allow multiple origins
+// CORS Configuration
 const allowedOrigins = ['http://localhost:5173', 'http://localhost:5175'];
-
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin) return callback(null, true); // Allow requests with no origin (e.g., mobile apps)
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
+            return callback(new Error('Not allowed by CORS'), false);
         }
         return callback(null, true);
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // Allow cookies and credentials if needed
+    credentials: true,
 }));
-
-// Set up multer for image upload
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, 'uploads'); // Ensure this path is correct
-        cb(null, uploadPath); // Folder to save uploaded files
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_${file.originalname}`); // Add a timestamp to the filename
-    }
-});
-
-const upload = multer({ storage });
-
-// Connect to MongoDB
-
-mongoose.connect('mongodb://localhost:27017/yourdbname', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((err) => {
-        console.error('MongoDB connection error:', err);
-        process.exit(1);  // Exit the process if MongoDB connection fails
-    });
-
-// Razorpay Setup
-const razorpay = new Razorpay({
-    key_id: 'rzp_test_TtA2LqaIHN7X2I',  // Your Razorpay Key ID
-    key_secret: '4h4VETyxgb9JXixtC11VEkJq',  // Your Razorpay Secret Key
-});
 
 // Login route
 app.post('/login', async (req, res) => {
@@ -108,37 +74,90 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Scholarship submission route
-app.post('/scholarship', upload.single('photo'), async (req, res) => {
+// Set up multer for handling multiple file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        let uploadPath = path.join(__dirname, 'uploads');
+        if (file.fieldname === 'photo') uploadPath = path.join(uploadPath, 'photos');
+        else if (file.fieldname === 'casteCertificate') uploadPath = path.join(uploadPath, 'casteCertificates');
+        else if (file.fieldname === 'incomeCertificate') uploadPath = path.join(uploadPath, 'incomeCertificates');
+        else if (file.fieldname === 'marksheet') uploadPath = path.join(uploadPath, 'marksheets');
+        cb(null, uploadPath);
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}_${file.originalname}`);
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }
+});
+
+// Serve static files from the "uploads" folder for direct access to images and documents
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')), (req, res, next) => {
+    console.log('File accessed:', req.url);
+    next();
+});
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/hostel', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error:', err));
+
+// Scholarship submission route with multiple file fields
+app.post('/scholarship', upload.fields([
+    { name: 'photo', maxCount: 1 },
+    { name: 'casteCertificate', maxCount: 1 },
+    { name: 'incomeCertificate', maxCount: 1 },
+    { name: 'marksheet', maxCount: 1 }
+]), async (req, res) => {
     const { name, college, marks, year } = req.body;
-    const photo = req.file ? req.file.path : null;  // Safely handle the photo
+    const files = req.files;
 
-    console.log("Request Body:", req.body);  // Log form data to check
-    console.log("Uploaded File:", req.file);  // Log file details to verify it's being received
+    console.log("Request body:", req.body);
+    console.log("Uploaded files:", req.files);
 
-    if (!photo) {
-        return res.status(400).send("Photo is required");  // Return error if no file uploaded
+    if (!files.photo || !files.casteCertificate || !files.incomeCertificate || !files.marksheet) {
+        return res.status(400).send("All documents (photo, caste, income, and marksheet) are required.");
     }
 
     try {
-        const newScholarship = new Scholarship({ name, college, marks, year, photo });
+        // Save only the relative path from /uploads
+        const newScholarship = new Scholarship({
+            name,
+            college,
+            marks,
+            year,
+            photo: `uploads/photos/${files.photo[0].filename}`,
+            casteCertificate: `uploads/casteCertificates/${files.casteCertificate[0].filename}`,
+            incomeCertificate: `uploads/incomeCertificates/${files.incomeCertificate[0].filename}`,
+            marksheet: `uploads/marksheets/${files.marksheet[0].filename}`
+        });
+
         await newScholarship.save();
         res.status(201).send("Scholarship application submitted successfully.");
     } catch (error) {
-        console.error("Error saving scholarship application:", error);
-        res.status(500).send("Error saving application.");
+        console.error("Error saving scholarship application:", error.message);
+        res.status(500).send(`Error saving application: ${error.message}`);
     }
 });
 
 // Fetch all scholarship applications
 app.get('/scholarships', async (req, res) => {
     try {
-        const scholarships = await Scholarship.find(); // Fetch all scholarship entries
+        const scholarships = await Scholarship.find();
         res.status(200).json(scholarships);
     } catch (error) {
         console.error("Error fetching scholarships:", error);
         res.status(500).send("Error fetching scholarships.");
     }
+});
+
+// Razorpay Setup
+const razorpay = new Razorpay({
+    key_id: 'rzp_test_TtA2LqaIHN7X2I',  // Your Razorpay Key ID
+    key_secret: '4h4VETyxgb9JXixtC11VEkJq',  // Your Razorpay Secret Key
 });
 
 // Razorpay Order Creation Route
@@ -149,7 +168,7 @@ app.post('/create-order', async (req, res) => {
     const options = {
         amount: amount * 100, // Convert to paise (smallest currency unit)
         currency: 'INR',
-        receipt: `receipt_${new Date().getTime()}`,
+        receipt: `receipt_${new Date().getTime()}`, // Corrected: use backticks for template literals
     };
 
     try {

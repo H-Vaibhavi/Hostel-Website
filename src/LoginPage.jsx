@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import './RegistrationPage.css';
+import Footer from './Footer';
 import axios from 'axios';
 import { useAuth } from './AuthContext'; // Import useAuth
+import adminLogo from './assets/images/Admin.png';
 
 const LoginPage = () => {
     const { login } = useAuth(); // Get login function from context
@@ -39,7 +41,7 @@ const LoginPage = () => {
             if (err.response && err.response.data && err.response.data.message) {
                 setErrorMessage(err.response.data.message);
             } else {
-                setErrorMessage("An error occurred during login. Please try again.");
+                setErrorMessage("Invalid login credentials");
             }
         } finally {
             setIsLoading(false);
@@ -51,12 +53,11 @@ const LoginPage = () => {
             {/* Header Section */}
             <div className="header-container">
                 <div className="navbar">
+                    <Link to="/admin"><img src={adminLogo} alt="Admin" className='logo'/></Link>
                     <Link to="/about">About Us</Link>
                     <Link to="/stories">Success Stories</Link>
                     <Link to="/mess">Mess Review</Link>
                     <Link to="/ScholarshipPage">Scholarship</Link>
-                    <Link to="/admin">Admin Panel</Link>
-                    {/* <a href="https://navayan.com/hostel-help.php#Hostel-Documents" target="_blank" rel="noopener noreferrer">Required Documents</a> */}
                     <Link to="/register" className="register-button">Register</Link>
                 </div>
                 
@@ -104,9 +105,9 @@ const LoginPage = () => {
             </div>
 
             {/* Footer Section */}
-            <footer className="footer">
-                <p>© 2024 All Rights Reserved</p>
-            </footer>
+            <div>
+                <Footer/>
+            </div>
         </div>
     );
 };

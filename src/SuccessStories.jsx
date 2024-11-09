@@ -1,6 +1,7 @@
 import React from 'react';
 import './SuccessStories.css'; // Optional for custom styling
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 // Import student images (replace these with the actual image paths)
 import studentImage1 from './assets/images/boy1.jpg';
@@ -9,6 +10,7 @@ import studentImage3 from './assets/images/boy3.jpeg';
 
 const SuccessStories = () => {
   return (
+    <div>
     <div className="success-stories-section">
         <Navbar /> {}
       <h2 className="highlight">Inspirational Success Stories</h2>
@@ -40,6 +42,8 @@ const SuccessStories = () => {
           </div>
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './MessReview.css';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const menu = [
   "Monday: Breakfast, Rice, Dal, Vegetable Curry, Chapati",
@@ -78,6 +79,7 @@ const MessReview = () => {
   };
 
   return (
+    <div>
     <div className="mess-review-page">
       <Navbar />
       <h2>Weekly Mess Menu</h2>
@@ -90,6 +92,8 @@ const MessReview = () => {
       <button onClick={handleRazorpayPayment}>Pay Monthly Charges with Razorpay</button>
       {message && <p>{message}</p>}
     </div>
+     <Footer />
+   </div>
   );
 };
 
