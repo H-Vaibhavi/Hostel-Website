@@ -8,10 +8,7 @@ body {
 }
 
 .scholar-container {
-  width: 600px; /* Adjusted width for better fit */
-  padding: 40px;
   background-color: #ffffff; /* White background for form */
-  border-radius: 10px;
   color: black;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -35,9 +32,11 @@ body {
 .scholar-container input[type="number"],
 .scholar-container input[type="file"] {
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
+  width: 500px;
+  color: black;
   background-color: transparent;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 16px;
   transition: border 0.3s ease;
 }

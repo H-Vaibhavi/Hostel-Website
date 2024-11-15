@@ -1,0 +1,82 @@
+.dashboard-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .cards-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    flex: 1;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  .student-card {
+    background-color: #3498db;
+  }
+  
+  .contact-card {
+    background-color: #2ecc71;
+  }
+  
+  .scholarship-card {
+    background-color: #e74c3c;
+  }
+  
+  .card button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .card button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .data-display {
+    margin-top: 30px;
+    max-height: 400px; /* Limit table height */
+    overflow-y: auto; /* Add scroll if table overflows */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    color: black;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  .download-link {
+    color: #3498db;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .download-link:hover {
+    color: #2c7cb8;
+  }
+  

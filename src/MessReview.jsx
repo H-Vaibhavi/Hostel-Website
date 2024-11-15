@@ -4,13 +4,13 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 const menu = [
-  "Monday: Breakfast, Rice, Dal, Vegetable Curry, Chapati",
-  "Tuesday: Breakfast, Rice, Dal, Vegetable Curry, Chapati",
-  "Wednesday: Breakfast, Chicken/Eggs, Chapati, Rice, Curry, Sweets",
-  "Thursday: Breakfast, Rice, Dal, Vegetable Curry, Chapati",
-  "Friday: Breakfast, Rice, Dal, Vegetable Curry, Chapati",
-  "Saturday: Breakfast, Rice, Dal, Vegetable Curry, Chapatiy",
-  "Sunday: OFF"
+  { day: "Monday", breakfast: "Bread & Tea", lunch: "Rice, Dal, Vegetable Curry, Chapati", dinner: "Rice, Chicken Curry, Chapati" },
+  { day: "Tuesday", breakfast: "Poha & Tea", lunch: "Rice, Dal, Vegetable Curry, Chapati", dinner: "Rice, Paneer Curry, Chapati" },
+  { day: "Wednesday", breakfast: "Idli & Sambar", lunch: "Rice, Dal, Vegetable Curry, Chapati", dinner: "Rice, Chicken/Eggs, Chapati" },
+  { day: "Thursday", breakfast: "Upma & Tea", lunch: "Rice, Dal, Vegetable Curry, Chapati", dinner: "Rice, Mix Veg Curry, Chapati" },
+  { day: "Friday", breakfast: "Aloo Paratha & Yogurt", lunch: "Rice, Dal, Vegetable Curry, Chapati", dinner: "Rice, Fish Curry, Chapati" },
+  { day: "Saturday", breakfast: "Dosa & Chutney", lunch: "Rice, Dal, Vegetable Curry, Chapati", dinner: "Rice, Meat Curry, Chapati" },
+  { day: "Sunday", breakfast: "OFF", lunch: "OFF", dinner: "OFF" }
 ];
 
 const MessReview = () => {
@@ -18,15 +18,14 @@ const MessReview = () => {
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   useEffect(() => {
-    // Dynamically load Razorpay script
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-    script.onload = () => setRazorpayLoaded(true);  // Set state to true once the script is loaded
+    script.onload = () => setRazorpayLoaded(true);
     script.onerror = () => console.error('Failed to load Razorpay script');
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);  // Cleanup the script when the component unmounts
+      document.body.removeChild(script);
     };
   }, []);
 
@@ -36,38 +35,27 @@ const MessReview = () => {
       return;
     }
 
-    const amount = 2000; // Amount in INR
+    const amount = 2000;
 
     try {
-      // Make a request to the backend to create an order
       const response = await fetch('http://localhost:3001/create-order', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: amount })
       });
 
       const data = await response.json();
       if (data.id) {
-        // Proceed with Razorpay payment initiation
         const options = {
-          key: 'rzp_test_TtA2LqaIHN7X2I', // Your Razorpay Key ID
-          amount: data.amount, // Amount in the smallest currency unit (e.g. paise)
+          key: 'rzp_test_TtA2LqaIHN7X2I',
+          amount: data.amount,
           currency: 'INR',
           name: 'Mess Payment',
           description: 'Monthly mess charges',
           order_id: data.id,
-          handler: function (response) {
-            setMessage('Payment Successful! Transaction ID: ' + response.razorpay_payment_id);
-          },
-          prefill: {
-            name: 'User',
-            email: 'user@example.com',
-          },
-          theme: {
-            color: '#F37254',
-          },
+          handler: (response) => setMessage('Payment Successful! Transaction ID: ' + response.razorpay_payment_id),
+          prefill: { name: 'User', email: 'user@example.com' },
+          theme: { color: '#F37254' },
         };
 
         const razorpayInstance = new window.Razorpay(options);
@@ -80,20 +68,31 @@ const MessReview = () => {
 
   return (
     <div>
-    <div className="mess-review-page">
-      <Navbar />
-      <h2>Weekly Mess Menu</h2>
-      <ul>
-        {menu.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-      <h3>Monthly Mess Charges: ₹2000</h3>
-      <button onClick={handleRazorpayPayment}>Pay Monthly Charges with Razorpay</button>
-      {message && <p>{message}</p>}
+      <div className="mess-review-page">
+        <Navbar />
+        <h2>Weekly Mess Menu</h2>
+        <div className="menu-card">
+          <div className="menu-header">
+            <div>Day</div>
+            <div>Breakfast</div>
+            <div>Lunch</div>
+            <div>Dinner</div>
+          </div>
+          {menu.map((item, index) => (
+            <div className="menu-row" key={index}>
+              <div>{item.day}</div>
+              <div>{item.breakfast}</div>
+              <div>{item.lunch}</div>
+              <div>{item.dinner}</div>
+            </div>
+          ))}
+        </div>
+        <h3>Monthly Mess Charges: ₹2000</h3>
+        <button onClick={handleRazorpayPayment}>Pay Monthly Charges with Razorpay</button>
+        {message && <p>{message}</p>}
+      </div>
+      <Footer />
     </div>
-     <Footer />
-   </div>
   );
 };
 

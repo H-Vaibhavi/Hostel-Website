@@ -71,24 +71,25 @@
 
 .login-section h2 {
   margin-bottom: 20px;
-  color: #e6e6e6; /* Lighter color to contrast dark background */
+  color:#28acea;  /* Lighter color to contrast dark background */
 }
 
-.form-group label {
-  color: #ffffff; /* White color for labels */
-  display: block;
-  margin: 5px;
-  font-weight: bold;
-}
 
-.input-field {
-  width: 100%;
+.form-group .input-field {
+  width: 250px;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #666;
   border-radius: 15px; /* Rounded input borders */
   background-color: rgba(255, 255, 255, 0.1); /* Slight transparency for input background */
   color: #ffffff; /* Text color */
+}
+
+.form-group .text {
+  color: #ffffff; /* White color for labels */
+  display: block;
+  margin: 5px;
+  font-weight: bold;
 }
 
 .input-field::placeholder {
@@ -131,5 +132,16 @@
   width: 100%;
 }
 
+.login-success{
+  padding:200px;
+  font-size: 30px;
 
+}
 
+.login-success h2{
+  color: rgb(11, 37, 86);
+}
+
+.block{
+  height: 500px;
+}

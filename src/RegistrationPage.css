@@ -28,12 +28,14 @@ h2 {
   margin-bottom: 15px;
 }
 
-.input-field {
-  width: 100px; /* Decreased width of input fields */
-  padding: 8px;
-  margin: 5px 0;
-  border: 1px solid #ccc; /* Optional border for input fields */
-  border-radius: 4px;
+.form-group .input-field {
+  width: 250px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #666;
+  border-radius: 15px; /* Rounded input borders */
+  background-color: rgba(14, 9, 9, 0.1); /* Slight transparency for input background */
+  color: #110c0c; /* Text color */
 }
 
 .register-button {

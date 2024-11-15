@@ -19,7 +19,7 @@ const Footer = () => {
           <h4>Contact Us</h4>
           <p><strong>Email:</strong> hostel@babasaheb.edu</p>
           <p><strong>Phone:</strong> +91 123 456 7890</p>
-          <p><strong>Address:</strong> Dr. Babasaheb Ambedkar Backward Class Boys Hostel, XYZ Street, City, Country</p>
+          <p><strong>Address:</strong> Dr. Babasaheb Ambedkar Backward Class Boys Hostel, Sangli-Miraj Road Vishrambag , Sangli</p>
         </div>
 
         <div className="footer-section">
@@ -41,9 +41,9 @@ const Footer = () => {
           <h4>Quick Links</h4>
           <ul>
             <li><a href="/about">About Us</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/faq">FAQ</a></li>
-            <li><a href="/scholarship">Scholarship</a></li>
+            <li><a href="/stories">Success Stories</a></li>
+            <li><a href="/mess">Mess Review</a></li>
+            <li><a href="/ScholarshipPage">Scholarship</a></li>
           </ul>
         </div>
       </div>

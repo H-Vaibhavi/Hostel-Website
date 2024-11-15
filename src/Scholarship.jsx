@@ -67,44 +67,48 @@ const Scholarship = () => {
       <h2>Scholarship Application</h2>
       <form onSubmit={formik.handleSubmit}>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Name:</label><br></br>
           <input
             id="name"
             name="name"
             type="text"
+            placeholder='Name'
             {...formik.getFieldProps('name')}
           />
           {formik.touched.name && formik.errors.name && <div>{formik.errors.name}</div>}
         </div>
 
         <div>
-          <label htmlFor="college">College:</label>
+          <label htmlFor="college">College Name:</label><br></br>
           <input
             id="college"
             name="college"
             type="text"
+            placeholder='College Name'
             {...formik.getFieldProps('college')}
           />
           {formik.touched.college && formik.errors.college && <div>{formik.errors.college}</div>}
         </div>
 
         <div>
-          <label htmlFor="marks">Marks:</label>
+          <label htmlFor="marks">Marks:</label><br></br>
           <input
             id="marks"
             name="marks"
             type="number"
+            placeholder='Marks'
             {...formik.getFieldProps('marks')}
           />
           {formik.touched.marks && formik.errors.marks && <div>{formik.errors.marks}</div>}
         </div>
 
         <div>
-          <label htmlFor="year">Current Academic Year:</label>
+          <label htmlFor="year">Current Academic Year:</label><br></br>
           <input
             id="year"
             name="year"
             type="text"
+            placeholder='Academic Year'
             {...formik.getFieldProps('year')}
           />
           {formik.touched.year && formik.errors.year && <div>{formik.errors.year}</div>}
@@ -112,7 +116,7 @@ const Scholarship = () => {
 
         {/* File Upload Inputs */}
         <div>
-          <label htmlFor="photo">Upload Photo:</label>
+          <label htmlFor="photo">Upload Photo:</label><br></br>
           <input
             type="file"
             onChange={handleFileUpload(setPhotoFile)}
@@ -121,7 +125,7 @@ const Scholarship = () => {
         </div>
 
         <div>
-          <label htmlFor="casteCertificate">Upload Caste Certificate:</label>
+          <label htmlFor="casteCertificate">Upload Caste Certificate:</label><br></br>
           <input
             type="file"
             onChange={handleFileUpload(setCasteFile)}
@@ -130,7 +134,7 @@ const Scholarship = () => {
         </div>
 
         <div>
-          <label htmlFor="incomeCertificate">Upload Income Certificate:</label>
+          <label htmlFor="incomeCertificate">Upload Income Certificate:</label><br></br>
           <input
             type="file"
             onChange={handleFileUpload(setIncomeFile)}
@@ -139,7 +143,7 @@ const Scholarship = () => {
         </div>
 
         <div>
-          <label htmlFor="marksheet">Upload Marksheet:</label>
+          <label htmlFor="marksheet">Upload Marksheet:</label><br></br>
           <input
             type="file"
             onChange={handleFileUpload(setMarksheetFile)}

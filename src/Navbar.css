@@ -16,6 +16,16 @@
     margin-right: 20px; /* Space between links */
   }
   
+  .navbar span{
+    color: red;
+    margin-left: 0px;
+  }
+
+  .navbar .hostel-name{
+    color: white;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
   .navbar a:hover {
     text-decoration: underline; /* Underline on hover */
   }
