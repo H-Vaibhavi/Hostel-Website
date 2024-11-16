@@ -6,7 +6,7 @@ body {
 
 /* About Us Section */
 .about-us-section {
-  padding: 20px;
+  
   border-radius: 8px;
   max-width: 100%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -25,7 +25,6 @@ body {
   font-size: 16px;
   line-height: 1.5;
   font-weight: bold;
-  color: black;
   text-align: center;
   margin: 20px auto;
 }
@@ -102,6 +101,7 @@ body {
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
 
 .contact-form h3, .feedback-form h3 {

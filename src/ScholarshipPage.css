@@ -39,6 +39,15 @@
   }
   
   .button{
-    background-color: rgb(44, 165, 44);
+    background-color: rgb(11, 49, 144);
+    color: white;
+    border-radius: 5px;
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+  }
+
+  .button:hover{
     color: black;
+    background-color: green;
   }

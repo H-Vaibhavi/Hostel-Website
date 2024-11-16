@@ -68,7 +68,7 @@
   margin-top: 20px;
 }
 
-.mess-review-page button {
+.mess-review-page .btn {
   padding: 12px;
   background-color: #28a745;
   color: white;
@@ -81,7 +81,7 @@
   transition: background-color 0.3s ease;
 }
 
-.mess-review-page button:hover {
+.mess-review-page .btn:hover {
   background-color: #218838;
 }
 

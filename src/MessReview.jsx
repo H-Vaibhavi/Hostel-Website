@@ -88,7 +88,7 @@ const MessReview = () => {
           ))}
         </div>
         <h3>Monthly Mess Charges: ₹2000</h3>
-        <button onClick={handleRazorpayPayment}>Pay Monthly Charges with Razorpay</button>
+        <button className='btn' onClick={handleRazorpayPayment}>Pay Monthly Charges with Razorpay</button>
         {message && <p>{message}</p>}
       </div>
       <Footer />

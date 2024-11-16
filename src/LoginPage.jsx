@@ -6,6 +6,7 @@ import Footer from './Footer';
 import axios from 'axios';
 import { useAuth } from './AuthContext'; // Import useAuth
 import adminLogo from './assets/images/Admin.png';
+import ProfileDropdown from './ProfileDropdown';
 
 const LoginPage = () => {
     const { login } = useAuth(); // Get login function from context
@@ -58,6 +59,7 @@ const LoginPage = () => {
                     <Link to="/mess">Mess Review</Link>
                     <Link to="/ScholarshipPage">Scholarship</Link>
                     <Link to="/register" className="register-button">Register</Link>
+                    <ProfileDropdown />
                 </div>
             </div>
 
